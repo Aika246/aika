@@ -1,101 +1,10 @@
 <!DOCTYPE html>
-<html lang="da">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Er det Amerikansk?</title>
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-family: sans-serif;
-        text-align: center;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-
-      img {
-        max-width: 100%;
-        height: auto;
-        cursor: pointer;
-      }
-
-      #answer {
-        display: none;
-        margin-top: 1em;
-        font-size: 3rem;
-        font-weight: bold;
-        color: #000;
-      }
-
-      #retryBtn {
-        display: none;
-        margin-top: 1em;
-        font-size: 1rem;
-        padding: 0.5em 1em;
-        cursor: pointer;
-        background-color: #eee;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-    </style>
+    <title>Testside</title>
   </head>
   <body>
-    <h1>Er det Amerikansk?</h1>
-
-    <img src="gronlandsflag.jpg" alt="Grønlands flag" id="flag" />
-
-    <p id="answer"></p>
-
-    <button id="retryBtn">Prøv igen</button>
-
-    <script>
-      const flag = document.getElementById("flag");
-      const answer = document.getElementById("answer");
-      const retryBtn = document.getElementById("retryBtn");
-
-      const responses = [
-        "Nej, det er grønlændernes land.",
-        "Nej, stadigvæk grønlændernes land.",
-        "Nope. Stadig ikke amerikansk.",
-        "Niks. Prøv i Alaska.",
-        "GRØNLANDS!",
-      ];
-
-      let currentIndex = 0;
-      let canClick = true;
-
-      flag.addEventListener("click", function () {
-        if (canClick && currentIndex < responses.length) {
-          answer.textContent = responses[currentIndex];
-          answer.style.display = "block";
-
-          // Hvis det er sidste svar
-          if (currentIndex === responses.length - 1) {
-            retryBtn.style.display = "none";
-            flag.style.pointerEvents = "none"; // deaktiver klik
-          } else {
-            retryBtn.style.display = "inline-block";
-            canClick = false;
-          }
-        }
-      });
-
-      retryBtn.addEventListener("click", function () {
-        answer.style.display = "none";
-        retryBtn.style.display = "none";
-        currentIndex++;
-        canClick = true;
-      });
-    </script>
+    <h1>Hej fra GitHub Pages!</h1>
   </body>
 </html>
+
