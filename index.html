@@ -32,14 +32,24 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        min-height: 100vh;
       }
 
-      h1 {
+      section {
+        margin-bottom: 4rem;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      h1,
+      h2 {
         font-size: 2rem;
-        margin-bottom: 1rem;
-        max-width: 90%;
+        margin-bottom: 0.5rem;
+      }
+
+      p.instruction {
+        font-size: 1.1rem;
+        margin-bottom: 1em;
+        color: #444;
       }
 
       img {
@@ -50,17 +60,18 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
-      #answer {
-        display: none;
+      .answer {
+        visibility: hidden;
+        height: 2.5em;
         margin-top: 1em;
         font-size: 1.5rem;
         font-weight: bold;
         color: #000;
-        max-width: 90%;
       }
 
-      #retryBtn {
-        display: none;
+      .retryBtn {
+        visibility: hidden;
+        height: 2.5em;
         margin-top: 1em;
         font-size: 1rem;
         padding: 0.6em 1.2em;
@@ -71,26 +82,53 @@
         transition: background-color 0.3s;
       }
 
-      #retryBtn:hover {
+      .retryBtn:hover {
         background-color: #ddd;
       }
     </style>
   </head>
   <body>
-    <h1>Er det Amerikansk?</h1>
-    <p id="instruction">Klik på billedet og find ud af det!</p>
-    <img src="gronlandsflag.jpg" alt="Grønlands flag" id="flag" />
+    <!-- SEKTION 1 – Grønland -->
+    <section>
+      <h1>Er det Amerikansk?</h1>
+      <p class="instruction">Klik på billedet og find ud af det!</p>
+      <img src="gronlandsflag.jpg" alt="Grønlands flag" id="flag1" />
+      <p class="answer" id="answer1"></p>
+      <button class="retryBtn" id="retryBtn1">Prøv igen</button>
+    </section>
 
-    <p id="answer"></p>
-
-    <button id="retryBtn">Prøv igen</button>
+    <!-- SEKTION 2 – Dagens billede -->
+    <section>
+      <h2>Dagens: Er det Amerikansk?</h2>
+      <p class="instruction">Klik på billedet og se dagens vurdering!</p>
+      <img src="hotdog.jpg" alt="Dagens billede" id="flag2" />
+      <p style="font-size: 0.9rem; color: #666">
+        Foto af
+        <a
+          href="https://unsplash.com/@mister_danny?utm_source=erdetamerikansk&utm_medium=referral"
+          target="_blank"
+          rel="noopener"
+          >Danny de Jong</a
+        >
+        på
+        <a
+          href="https://unsplash.com/photos/CRnTIhqbsyU?utm_source=erdetamerikansk&utm_medium=referral"
+          target="_blank"
+          rel="noopener"
+          >Unsplash</a
+        >
+      </p>
+      <p class="answer" id="answer2"></p>
+      <button class="retryBtn" id="retryBtn2">Prøv igen</button>
+    </section>
 
     <script>
-      const flag = document.getElementById("flag");
-      const answer = document.getElementById("answer");
-      const retryBtn = document.getElementById("retryBtn");
+      // === GRØNLAND ===
+      const flag1 = document.getElementById("flag1");
+      const answer1 = document.getElementById("answer1");
+      const retryBtn1 = document.getElementById("retryBtn1");
 
-      const responses = [
+      const responses1 = [
         "Nej, det er grønlændernes land.",
         "Nej, stadigvæk grønlændernes land.",
         "Nope. Stadig ikke amerikansk.",
@@ -98,30 +136,73 @@
         "GRØNLANDS!",
       ];
 
-      let currentIndex = 0;
-      let canClick = true;
+      let index1 = 0;
+      let canClick1 = true;
 
-      flag.addEventListener("click", function () {
-        if (canClick && currentIndex < responses.length) {
-          answer.textContent = responses[currentIndex];
-          answer.style.display = "block";
+      flag1.addEventListener("click", function () {
+        if (canClick1 && index1 < responses1.length) {
+          answer1.textContent = responses1[index1];
+          answer1.style.visibility = "visible";
 
-          if (currentIndex === responses.length - 1) {
-            retryBtn.style.display = "none";
-            flag.style.pointerEvents = "none";
+          if (index1 === responses1.length - 1) {
+            retryBtn1.style.visibility = "hidden";
+            flag1.style.pointerEvents = "none";
           } else {
-            retryBtn.style.display = "inline-block";
-            canClick = false;
+            retryBtn1.style.visibility = "visible";
+            canClick1 = false;
           }
         }
       });
 
-      retryBtn.addEventListener("click", function () {
-        answer.style.display = "none";
-        retryBtn.style.display = "none";
-        currentIndex++;
-        canClick = true;
+      retryBtn1.addEventListener("click", function () {
+        answer1.style.visibility = "hidden";
+        retryBtn1.style.visibility = "hidden";
+        index1++;
+        canClick1 = true;
+      });
+
+      // === DAGENS ===
+      const flag2 = document.getElementById("flag2");
+      const answer2 = document.getElementById("answer2");
+      const retryBtn2 = document.getElementById("retryBtn2");
+
+      const responses2 = [
+        "Nej. Den blev importeret med tysk accent.",
+        "Næsten... men Tyskland havde pølsen først.",
+        "USA opfandt navnet – ikke pølsen.",
+        "Nej, det er en tysk emigrant med amerikansk pas.",
+        "Den blev 'født' i Frankfurt, men 'opvokset' i New York.",
+        "Pølse + brød = tysk logik. Navnet? 100% amerikansk markedsføring.",
+      ];
+
+      let index2 = 0;
+      let canClick2 = true;
+
+      flag2.addEventListener("click", function () {
+        if (canClick2 && index2 < responses2.length) {
+          answer2.textContent = responses2[index2];
+          answer2.style.visibility = "visible";
+
+          if (index2 === responses2.length - 1) {
+            retryBtn2.style.visibility = "hidden";
+            flag2.style.pointerEvents = "none";
+          } else {
+            retryBtn2.style.visibility = "visible";
+            canClick2 = false;
+          }
+        }
+      });
+
+      retryBtn2.addEventListener("click", function () {
+        answer2.style.visibility = "hidden";
+        retryBtn2.style.visibility = "hidden";
+        index2++;
+        canClick2 = true;
       });
     </script>
+    <footer style="margin-top: 2rem; font-size: 0.9rem; color: #444">
+      Har du et forslag? Skriv til:
+      <a href="mailto:isitamerican@proton.me">isitamerican@proton.me</a>
+    </footer>
   </body>
 </html>
