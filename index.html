@@ -4,19 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Er det Amerikansk?</title>
-    <!-- Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-Y54Z20QBS5"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-Y54Z20QBS5");
-    </script>
     <style>
       * {
         box-sizing: border-box;
@@ -85,6 +72,12 @@
       .retryBtn:hover {
         background-color: #ddd;
       }
+
+      #credit {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.5em;
+      }
     </style>
   </head>
   <body>
@@ -101,29 +94,14 @@
     <section>
       <h2>Dagens: Er det Amerikansk?</h2>
       <p class="instruction">Klik på billedet og se dagens vurdering!</p>
-      <img src="hotdog.jpg" alt="Dagens billede" id="flag2" />
-      <p style="font-size: 0.9rem; color: #666">
-        Foto af
-        <a
-          href="https://unsplash.com/@mister_danny?utm_source=erdetamerikansk&utm_medium=referral"
-          target="_blank"
-          rel="noopener"
-          >Danny de Jong</a
-        >
-        på
-        <a
-          href="https://unsplash.com/photos/CRnTIhqbsyU?utm_source=erdetamerikansk&utm_medium=referral"
-          target="_blank"
-          rel="noopener"
-          >Unsplash</a
-        >
-      </p>
+      <img src="" alt="Dagens billede" id="flag2" />
+      <p id="credit"></p>
       <p class="answer" id="answer2"></p>
       <button class="retryBtn" id="retryBtn2">Prøv igen</button>
     </section>
 
     <script>
-      // === GRØNLAND ===
+      // === SEKTION 1 – Grønland ===
       const flag1 = document.getElementById("flag1");
       const answer1 = document.getElementById("answer1");
       const retryBtn1 = document.getElementById("retryBtn1");
@@ -161,29 +139,97 @@
         canClick1 = true;
       });
 
-      // === DAGENS ===
+      // === SEKTION 2 – DAGENS ===
       const flag2 = document.getElementById("flag2");
       const answer2 = document.getElementById("answer2");
       const retryBtn2 = document.getElementById("retryBtn2");
+      const credit = document.getElementById("credit");
 
-      const responses2 = [
-        "Nej. Den blev importeret med tysk accent.",
-        "Næsten... men Tyskland havde pølsen først.",
-        "USA opfandt navnet – ikke pølsen.",
-        "Nej, det er en tysk emigrant med amerikansk pas.",
-        "Den blev 'født' i Frankfurt, men 'opvokset' i New York.",
-        "Pølse + brød = tysk logik. Navnet? 100% amerikansk markedsføring.",
-      ];
+      const ugensIndhold = {
+        0: {
+          billede: "hotdog.jpg",
+          svar: [
+            "Nej. Den blev importeret med tysk accent.",
+            "Næsten... men Tyskland havde pølsen først.",
+            "USA opfandt navnet – ikke pølsen.",
+            "Nej, det er en tysk emigrant med amerikansk pas.",
+            "Den blev 'født' i Frankfurt, men 'opvokset' i New York.",
+            "Pølse + brød = tysk logik. Navnet? 100% amerikansk markedsføring.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@mister_danny" target="_blank" rel="noopener">Danny de Jong</a> på <a href="https://unsplash.com/photos/CRnTIhqbsyU" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+        1: {
+          billede: "tesla.jpg",
+          svar: [
+            "Ja… men den vil hellere i rummet end til Rema.",
+            "Elon Musk sagde ja. Vi siger… måske?",
+            "Amerikansk? Ja. Dansk? Ikke før den kan trække en campingvogn til Lalandia.",
+            "Fuldstændig amerikansk… indtil den skal parkeres i en 80 cm P-bås på Nørrebro.",
+            "100% amerikansk… indtil softwareopdateringen slår din varme fra.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@noahclancy" target="_blank" rel="noopener">Noah Clancy</a> på <a href="https://unsplash.com/photos/D1w-heh9uMg" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+        2: {
+          billede: "tirsdag.jpg",
+          svar: [
+            "Tirsdagen er dansk – og det her også.",
+            "Nej. Tirsdagens ting er hjemmeavlet.",
+            "Nope. Den har aldrig været i USA.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@person2" target="_blank" rel="noopener">Fotograf 2</a> på <a href="https://unsplash.com/photos/ID2" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+        3: {
+          billede: "onsdag.jpg",
+          svar: [
+            "Midtuge og stadig ikke amerikansk.",
+            "Niks. Onsdagsviben er 100% dansk.",
+            "Onsdag er for kartofler, ikke burgere.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@person3" target="_blank" rel="noopener">Fotograf 3</a> på <a href="https://unsplash.com/photos/ID3" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+        4: {
+          billede: "torsdag.jpg",
+          svar: [
+            "Torsdagens genstand er ikke amerikansk.",
+            "Nej. Torsdag = rugbrød, ikke hotdog.",
+            "Stadig dansk. Stadig torsdag.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@person4" target="_blank" rel="noopener">Fotograf 4</a> på <a href="https://unsplash.com/photos/ID4" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+        5: {
+          billede: "fredag.jpg",
+          svar: [
+            "Fredag! Men nej, det er ikke amerikansk.",
+            "Fredagsfeeling = dansk hygge, ikke USA.",
+            "Stadig ikke amerikansk, selvom det er fredag.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@person5" target="_blank" rel="noopener">Fotograf 5</a> på <a href="https://unsplash.com/photos/ID5" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+        6: {
+          billede: "lørdag.jpg",
+          svar: [
+            "Lørdagens emne? Ikke fra USA.",
+            "Nope. Lørdagen lyver ikke.",
+            "Nej, nej og atter nej.",
+          ],
+          credit: `Foto af <a href="https://unsplash.com/@person6" target="_blank" rel="noopener">Fotograf 6</a> på <a href="https://unsplash.com/photos/ID6" target="_blank" rel="noopener">Unsplash</a>`,
+        },
+      };
+
+      const today = new Date().getDay();
+      const dagens = ugensIndhold[today];
+      flag2.src = dagens.billede;
+      credit.innerHTML = dagens.credit;
 
       let index2 = 0;
       let canClick2 = true;
 
       flag2.addEventListener("click", function () {
-        if (canClick2 && index2 < responses2.length) {
-          answer2.textContent = responses2[index2];
+        if (canClick2 && index2 < dagens.svar.length) {
+          answer2.textContent = dagens.svar[index2];
           answer2.style.visibility = "visible";
 
-          if (index2 === responses2.length - 1) {
+          if (index2 === dagens.svar.length - 1) {
             retryBtn2.style.visibility = "hidden";
             flag2.style.pointerEvents = "none";
           } else {
@@ -200,6 +246,7 @@
         canClick2 = true;
       });
     </script>
+
     <footer style="margin-top: 2rem; font-size: 0.9rem; color: #444">
       Har du et forslag? Skriv til:
       <a href="mailto:isitamerican@proton.me">isitamerican@proton.me</a>
